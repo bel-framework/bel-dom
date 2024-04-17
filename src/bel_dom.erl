@@ -34,20 +34,35 @@
 %%% API
 %%%=====================================================================
 
-scan_document(String) ->
+scan_document(String) when is_binary(String) ->
     bel_dom_html:scan(String).
 
-parse_document(Tokens) ->
-    bel_dom_html:parse(Tokens).
+parse_document(Tokens) when is_list(Tokens) ->
+    bel_dom_html:parse(Tokens);
+parse_document(String) when is_binary(String) ->
+    parse_document(scan_document(String)).
 
-scan_query(String) ->
+scan_query(String) when is_binary(String) ->
     bel_dom_css:scan(String).
 
-parse_query(Tokens) ->
-    bel_dom_css:parse(Tokens).
+parse_query(Tokens) when is_list(Tokens) ->
+    bel_dom_css:parse(Tokens);
+parse_query(String) when is_binary(String) ->
+    {ok, Tokens, _} = scan_query(String),
+    parse_query(Tokens).
 
-query_selector(Selectors, Tokens) ->
-    bel_dom_css:find_one(Selectors, Tokens).
+query_selector(Selectors, DOM) when is_list(Selectors), is_list(DOM) ->
+    bel_dom_css:find_one(Selectors, DOM);
+query_selector(Query, DOM) when is_binary(Query) ->
+    {ok, Selectors} = parse_query(Query),
+    query_selector(Selectors, DOM);
+query_selector(Selectors, DOM) when is_binary(DOM) ->
+    query_selector(Selectors, parse_document(DOM)).
 
-query_selector_all(Selectors, Tokens) ->
-    bel_dom_css:find_all(Selectors, Tokens).
+query_selector_all(Selectors, DOM) when is_list(Selectors), is_list(DOM) ->
+    bel_dom_css:find_all(Selectors, DOM);
+query_selector_all(Query, DOM) when is_binary(Query) ->
+    {ok, Selectors} = parse_query(Query),
+    query_selector_all(Selectors, DOM);
+query_selector_all(Selectors, DOM) when is_binary(DOM) ->
+    query_selector_all(Selectors, parse_document(DOM)).
