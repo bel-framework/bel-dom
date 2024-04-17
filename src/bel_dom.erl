@@ -24,8 +24,8 @@
 % API
 -export([ scan_document/1
         , parse_document/1
-        , scan_css_selector/1
-        , parse_css_selector/1
+        , scan_query/1
+        , parse_query/1
         , query_selector/2
         , query_selector_all/2
         ]).
@@ -40,10 +40,10 @@ scan_document(String) ->
 parse_document(Tokens) ->
     bel_dom_html:parse(Tokens).
 
-scan_css_selector(String) ->
+scan_query(String) ->
     bel_dom_css:scan(String).
 
-parse_css_selector(Tokens) ->
+parse_query(Tokens) ->
     bel_dom_css:parse(Tokens).
 
 query_selector(Selectors, Tokens) ->
