@@ -1,1 +1,12 @@
-[].
+[{<<"bel_css">>,
+  {git,"https://github.com/bel-framework/bel-css",
+       {ref,"153c023d766fb0b7f6498062a133482bd11e6d7f"}},
+  0},
+ {<<"bel_html">>,
+  {git,"https://github.com/bel-framework/bel-html",
+       {ref,"bd7fbcd60bad59bba4ce5a5fcb485b9db0b743f9"}},
+  0},
+ {<<"bel_scan">>,
+  {git,"https://github.com/bel-framework/bel-scan",
+       {ref,"08880bc8b4aaea6bd3cc928916c2752a0288718a"}},
+  1}].
