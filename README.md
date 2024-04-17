@@ -1,9 +1,9 @@
-bel_dom
-=====
+# bel-framework/bel-dom
 
-An OTP library
+DOM (Document Object Model) API for Erlang.
 
-Build
------
+## Build
 
-    $ rebar3 compile
+```shell
+$ rebar3 compile
+```
