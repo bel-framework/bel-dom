@@ -1,7 +1,7 @@
 %%%---------------------------------------------------------------------
 %%% @copyright 2024 William Fank Thomé
 %%% @author William Fank Thomé <willilamthome@hotmail.com>
-%%% @doc DOM module.
+%%% @doc HTML module.
 %%%
 %%% Copyright 2024 William Fank Thomé
 %%%
@@ -19,35 +19,17 @@
 %%%
 %%% @end
 %%%---------------------------------------------------------------------
--module(bel_dom).
+-module(bel_dom_html).
 
 % API
--export([ scan_document/1
-        , parse_document/1
-        , scan_css_selector/1
-        , parse_css_selector/1
-        , query_selector/2
-        , query_selector_all/2
-        ]).
+-export([ scan/1, parse/1 ]).
 
 %%%=====================================================================
 %%% API
 %%%=====================================================================
 
-scan_document(String) ->
-    bel_dom_html:scan(String).
+scan(String) ->
+    bel_html:scan_html5(String).
 
-parse_document(Tokens) ->
-    bel_dom_html:parse(Tokens).
-
-scan_css_selector(String) ->
-    bel_dom_css:scan(String).
-
-parse_css_selector(Tokens) ->
-    bel_dom_css:parse(Tokens).
-
-query_selector(Selectors, Tokens) ->
-    bel_dom_css:find_one(Selectors, Tokens).
-
-query_selector_all(Selectors, Tokens) ->
-    bel_dom_css:find_all(Selectors, Tokens).
+parse(Tokens) ->
+    bel_html:parse_html5(Tokens).
